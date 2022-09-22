@@ -1,5 +1,5 @@
-﻿using Medicina.Domain.Models;
-using Medicina.Domain.Models.Repository;
+﻿using Medicina.Domain.Aso;
+using Medicina.Domain.Aso.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
 using System;
@@ -14,7 +14,6 @@ namespace Medicina.Repository.Repository
     {
         public AsoRepository(MedicinaContext context) : base(context)
         {
-
         }
     }
 }

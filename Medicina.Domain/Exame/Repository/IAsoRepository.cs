@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Medicina.Domain.Models.Repository
+namespace Medicina.Domain.Aso.Repository
 {
-    public interface IAsoRepository: IRepository<Aso>
+    public interface IAsoRepository : IRepository<Aso>
     {
     }
 }

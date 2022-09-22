@@ -19,7 +19,7 @@ namespace Medicina.Domain.Account
         public Email Email { get; set; }
         public Password Password { get; set; }
         public TipoUsuarioEnum TipoUsuario { get; set; }
-        public List<Empresa> Empresas { get; set; }
+        public IList<Empresa> Empresas { get; set; }
 
         public void SetPassword()
         {
