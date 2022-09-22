@@ -1,4 +1,4 @@
-﻿using Medicina.Domain.Models.Repository;
+﻿using Medicina.Domain.Account.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
 using Medicina.Repository.Repository;
@@ -21,7 +21,12 @@ namespace Medicina.Repository
                 c.UseSqlServer(connectionString);
             });
             services.AddScoped(typeof(Repository<>));
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddScoped<IAsoRepository, AsoRepository>();
             
+
 
             return services;
         }
