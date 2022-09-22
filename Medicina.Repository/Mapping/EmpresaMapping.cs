@@ -1,4 +1,4 @@
-﻿using Medicina.Domain.Models;
+﻿using Medicina.Domain.Cadastro;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

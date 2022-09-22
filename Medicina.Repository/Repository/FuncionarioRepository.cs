@@ -1,5 +1,5 @@
-﻿using Medicina.Domain.Models;
-using Medicina.Domain.Models.Repository;
+﻿using Medicina.Domain.Cadastro;
+using Medicina.Domain.Cadastro.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
 using System;

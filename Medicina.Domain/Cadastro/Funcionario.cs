@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Medicina.Domain.Models
+namespace Medicina.Domain.Cadastro
 {
     public class Funcionario
     {

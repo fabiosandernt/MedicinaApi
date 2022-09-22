@@ -1,5 +1,5 @@
-﻿using Medicina.Domain.Aso;
-using Medicina.Domain.Aso.Repository;
+﻿using Medicina.Domain.Exame;
+using Medicina.Domain.Exame.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
 using System;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Medicina.Domain.Aso.Repository
+namespace Medicina.Domain.Exame.Repository
 {
     public interface IAsoRepository : IRepository<Aso>
     {
