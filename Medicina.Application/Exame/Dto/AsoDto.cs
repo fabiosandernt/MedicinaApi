@@ -1,4 +1,5 @@
 ﻿using Medicina.Domain.Account.ValueObject;
+using Medicina.Domain.Cadastro;
 using Medicina.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Medicina.Application.Exame.Dto
     public record FuncionarioInputDto(string Name, string Setor, string Cpf, string Pis , DateTime? DataNascimento, string Funcao , string MatriculaEsocial);
     public record FuncionarioOutputDto(Guid Id, string Name, string Setor, string Cpf, string Pis, DateTime? DataNascimento, string Funcao, string MatriculaEsocial);
 
-
+    public record AsoInputDto( string TipoExame, DateTime? DataExame ,string Imagem, Funcionario Funcionario );
+    public record AsoOutputDto(Guid FuncionarioId , string TipoExame, DateTime? DataExame ,string Imagem, Funcionario Funcionario );
 
 }

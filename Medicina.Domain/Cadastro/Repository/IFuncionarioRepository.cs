@@ -9,6 +9,6 @@ namespace Medicina.Domain.Cadastro.Repository
 {
     public interface IFuncionarioRepository: IRepository<Funcionario>
     {
-
+        Task<IEnumerable<Funcionario>> ObterTodosFuncionarios();
     }
 }

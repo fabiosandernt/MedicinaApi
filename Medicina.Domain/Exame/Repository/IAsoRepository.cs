@@ -9,5 +9,6 @@ namespace Medicina.Domain.Exame.Repository
 {
     public interface IAsoRepository : IRepository<Aso>
     {
+        Task<IEnumerable<Aso>> ObterTodosAsos();
     }
 }

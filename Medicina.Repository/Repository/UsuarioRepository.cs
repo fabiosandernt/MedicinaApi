@@ -1,7 +1,9 @@
 ﻿using Medicina.Domain.Account;
 using Medicina.Domain.Account.Repository;
+using Medicina.Domain.Cadastro;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,11 @@ namespace Medicina.Repository.Repository
         public UsuarioRepository(MedicinaContext context): base(context)
         {
 
+        }
+
+        public async Task<IEnumerable<Usuario>> ObterTodosUsuarios()
+        {
+            return await this.Query.Include(x => x.Name).ToListAsync();
         }
     }
 }

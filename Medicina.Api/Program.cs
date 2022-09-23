@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Medicina.Application;
 using Medicina.Repository;
 

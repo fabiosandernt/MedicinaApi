@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Medicina.Application.Exame.Service;
 
 namespace Medicina.Application
 {
@@ -16,8 +17,9 @@ namespace Medicina.Application
 
             services.AddMediatR(typeof(Application.ConfigurationModule).Assembly);
 
-            //services.AddScoped<IBandaService, BandaService>();
-            //services.AddScoped<IAlbumService, AlbumService>();
+            services.AddScoped<IAsoService, AsoService>();
+            services.AddScoped<IEmpresaService, EmpresaService>();
+            services.AddScoped<IFuncionarioService, FuncionarioService>();
 
             return services;
         }

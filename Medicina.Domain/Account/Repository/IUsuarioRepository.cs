@@ -1,4 +1,5 @@
 ﻿using Medicina.CrossCutting.Repository;
+using Medicina.Domain.Cadastro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Medicina.Domain.Account.Repository
 {
     public interface IUsuarioRepository : IRepository<Usuario>
     {
+        Task<IEnumerable<Usuario>> ObterTodosUsuarios();
     }
 }

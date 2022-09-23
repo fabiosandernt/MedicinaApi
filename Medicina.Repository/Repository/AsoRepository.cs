@@ -1,7 +1,9 @@
-﻿using Medicina.Domain.Exame;
+﻿using Medicina.Domain.Cadastro;
+using Medicina.Domain.Exame;
 using Medicina.Domain.Exame.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,11 @@ namespace Medicina.Repository.Repository
     {
         public AsoRepository(MedicinaContext context) : base(context)
         {
+        }
+
+        public async Task<IEnumerable<Aso>> ObterTodosAsos()
+        {
+            return await this.Query.ToListAsync();
         }
     }
 }

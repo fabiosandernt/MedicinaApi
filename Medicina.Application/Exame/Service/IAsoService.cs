@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Medicina.Application.Exame.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace Medicina.Application.Exame.Service
 {
     public interface IAsoService
     {
+        Task<AsoOutputDto> Criar(AsoInputDto dto);
+        Task<List<AsoOutputDto>> ObterTodos();
     }
 }

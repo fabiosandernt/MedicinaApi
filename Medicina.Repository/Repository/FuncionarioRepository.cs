@@ -2,6 +2,7 @@
 using Medicina.Domain.Cadastro.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace Medicina.Repository.Repository
         public FuncionarioRepository(MedicinaContext context) : base(context)
         {
 
+        }
+        public async Task<IEnumerable<Funcionario>> ObterTodosFuncionarios()
+        {
+            return await this.Query.Include(x => x.Name).ToListAsync();
         }
     }
 }

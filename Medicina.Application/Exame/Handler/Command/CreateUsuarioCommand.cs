@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Medicina.Application.Exame.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,23 @@ using System.Threading.Tasks;
 
 namespace Medicina.Application.Exame.Handler.Command
 {
-    public class CreateUsuarioCommand
+    public class CreateUsuarioCommand : IRequest<CreateUsuarioCommandResponse>
     {
+        public UsuarioInputDto Usuario { get; set; }
 
+        public CreateUsuarioCommand(UsuarioInputDto usuario)
+        {
+            Usuario = usuario;
+        }
+    }
 
+    public class CreateUsuarioCommandResponse
+    {
+        public UsuarioOutputDto Usuario { get; set; }
+
+        public CreateUsuarioCommandResponse(UsuarioOutputDto usuario)
+        {
+            Usuario = usuario;
+        }
     }
 }

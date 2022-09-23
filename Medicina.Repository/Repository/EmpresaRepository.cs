@@ -2,6 +2,7 @@
 using Medicina.Domain.Cadastro.Repository;
 using Medicina.Repository.Context;
 using Medicina.Repository.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,10 @@ namespace Medicina.Repository.Repository
         {
 
         }
+        public async Task<IEnumerable<Empresa>> ObterTodasEmpresas()
+        {
+            return await this.Query.Include(x => x.RazaoSocial).ToListAsync();
+        }
+
     }
 }

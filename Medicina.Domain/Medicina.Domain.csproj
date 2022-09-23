@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Exame\Rules\**" />
+    <EmbeddedResource Remove="Exame\Rules\**" />
+    <None Remove="Exame\Rules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Account\Repository\" />
-    <Folder Include="Exame\Rules\" />
   </ItemGroup>
 
   <ItemGroup>
