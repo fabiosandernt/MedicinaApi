@@ -11,5 +11,9 @@ namespace Medicina.Application.Exame.Service
     {
         Task<FuncionarioOutputDto> Criar(FuncionarioInputDto dto);
         Task<List<FuncionarioOutputDto>> ObterTodos();
+        Task<FuncionarioOutputDto> Atualizar(FuncionarioInputDto dto);
+        Task<FuncionarioOutputDto> Deletar(FuncionarioInputDto dto);
+        Task<FuncionarioOutputDto> ObterPorId(Guid id);
+       
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Medicina.Application.Exame.Dto;
+using Medicina.Domain.Cadastro;
 using Medicina.Domain.Cadastro.Repository;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace Medicina.Application.Exame.Service
 {
     public class EmpresaService: IEmpresaService
     {
-        private readonly IEmpresaRepository albumRepository;
+        private readonly IEmpresaRepository empresaRepository;
         private readonly IMapper mapper;
 
-        public EmpresaService(IEmpresaRepository albumRepository, IMapper mapper)
+        public EmpresaService(IEmpresaRepository empresaRepository, IMapper mapper)
         {
-            this.albumRepository = albumRepository;
+            this.empresaRepository = empresaRepository;
             this.mapper = mapper;
         }
 
@@ -24,7 +25,27 @@ namespace Medicina.Application.Exame.Service
         {
             var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);
 
-            await this.albumRepository.Save(empresa);
+            await this.empresaRepository.Save(empresa);
+
+            return this.mapper.Map<EmpresaOutputDto>(empresa);
+
+        }
+
+        public async Task<EmpresaOutputDto> Deletar(EmpresaInputDto dto)
+        {
+            var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);
+
+            await this.empresaRepository.Delete(empresa);
+
+            return this.mapper.Map<EmpresaOutputDto>(empresa);
+
+        }
+
+        public async Task<EmpresaOutputDto> Atualizar(EmpresaInputDto dto)
+        {
+            var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);
+
+            await this.empresaRepository.Update(empresa);
 
             return this.mapper.Map<EmpresaOutputDto>(empresa);
 
@@ -32,9 +53,17 @@ namespace Medicina.Application.Exame.Service
 
         public async Task<List<EmpresaOutputDto>> ObterTodos()
         {
-            var empresa = await this.albumRepository.GetAll();
+            var empresa = await this.empresaRepository.GetAll();
 
             return this.mapper.Map<List<EmpresaOutputDto>>(empresa);
+        }
+
+        public async Task<EmpresaOutputDto> ObterPorId(Guid id)
+        {
+            var empresa = await this.empresaRepository.Get(id);
+
+            return this.mapper.Map<EmpresaOutputDto>(empresa);
+
         }
     }
 }
