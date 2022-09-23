@@ -20,6 +20,7 @@ namespace Medicina.Application
             services.AddScoped<IAsoService, AsoService>();
             services.AddScoped<IEmpresaService, EmpresaService>();
             services.AddScoped<IFuncionarioService, FuncionarioService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             return services;
         }
