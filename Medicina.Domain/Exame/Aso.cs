@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Medicina.CrossCutting.Entity;
+using Medicina.Domain.Cadastro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Medicina.Domain.Exame
 {
-    public class Aso
+    public class Aso : Entity<Guid>
     {
-        public int Id { get; set; }
         public string TipoExame { get; set; }
         public DateTime? DataExame { get; set; }
-
+        public string Imagem { get; set; }
+        public Funcionario Funcionario { get; set; }
+        public Guid FuncionarioId { get; set; }
 
     }
 }

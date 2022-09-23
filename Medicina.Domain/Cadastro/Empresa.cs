@@ -1,4 +1,5 @@
-﻿using Medicina.Domain.Account;
+﻿using Medicina.CrossCutting.Entity;
+using Medicina.Domain.Account;
 using Medicina.Domain.Account.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Medicina.Domain.Cadastro
 {
-    public class Empresa
+    public class Empresa: Entity<Guid>
     {
-        public int Id { get; set; }
+     
         public string RazaoSocial { get; set; }
         public Email Email { get; set; }
         public string Endereco { get; set; }
@@ -19,5 +20,6 @@ namespace Medicina.Domain.Cadastro
         public int Risco { get; set; }
         public IList<Funcionario> Funcionarios { get; set; }
         public Usuario Usuario { get; set; }
+        public Guid UsuarioId { get; set; }
     }
 }

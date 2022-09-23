@@ -20,7 +20,7 @@ namespace Medicina.Domain.Account
         public Password Password { get; set; }
         public TipoUsuarioEnum TipoUsuario { get; set; }
         public IList<Empresa> Empresas { get; set; }
-
+        
         public void SetPassword()
         {
             this.Password.Valor = SecurityUtils.HashSHA1(this.Password.Valor);

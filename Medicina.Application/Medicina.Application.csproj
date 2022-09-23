@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Medicina.Domain\Medicina.Domain.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Exame\Profile\" />
+	</ItemGroup>
+
 </Project>
