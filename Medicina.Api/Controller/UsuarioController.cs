@@ -2,6 +2,7 @@
 using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
+using Medicina.CrossCutting.Utils;
 using Medicina.Domain.Account.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,27 +25,47 @@ namespace Medicina.Api.Controller
             return Ok(await this.mediator.Send(new GetAllUsuarioQuery()));
         }
 
-        [HttpGet("ObterPorId")]
-        public async Task<IActionResult> ObterPorId(Guid id)
+        [HttpGet("{id:guid}/ObterPorId")]
+        public async Task<IActionResult> ObterPorId([FromRoute] Guid id)
         {
-            return Ok(await this.mediator.Send(new GetUsuarioQuery(id)));
+            var result = await this.mediator.Send(new GetUsuarioQuery(id));
+
+            return result?.Usuario is null ? NotFound() : Ok(result);
         }
 
         [HttpPost()]
-        public async Task<IActionResult> Criar(UsuarioInputDto dto)
+        public async Task<IActionResult> Criar([FromBody] UsuarioInputDto dto)
         {
-            var result = await this.mediator.Send(new CreateUsuarioCommand(dto));
-            return Created($"{result.Usuario.Id}", result.Usuario);
+            if (dto is null) return UnprocessableEntity();
+
+            try
+            {
+                var result = await this.mediator.Send(new CreateUsuarioCommand(dto));
+                return Created($"{result.Usuario.Id}", result.Usuario);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ApiResponseError(e.Message));
+            }
         }
 
         [HttpPut()]
-        public async Task<IActionResult> Atualizar(UsuarioInputDto dto)
+        public async Task<IActionResult> Atualizar([FromBody] UsuarioInputDto dto)
         {
-            var result = await this.mediator.Send(new UpdateUsuarioCommand(dto));
-            return Ok(result.Usuario);
+            if (dto is null) return UnprocessableEntity();
+
+            try
+            {
+                var result = await this.mediator.Send(new UpdateUsuarioCommand(dto));
+                return Ok(result.Usuario);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new ApiResponseError(e.Message));
+            }
         }
 
-        [HttpDelete()]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Apagar(UsuarioInputDto dto)
         {
             var result = await this.mediator.Send(new DeleteUsuarioCommand(dto));

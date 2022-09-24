@@ -6,16 +6,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Medicina.Application.Exame.Dto
 {
-    public record UsuarioInputDto(Guid? Id,
-        [Required(ErrorMessage = "O nome é requerido!")]  string Nome,
-        [Required(ErrorMessage = "o Tipo é requerido!")] TipoUsuarioEnum TipoUsuarioEnum, 
-        [Required(ErrorMessage = "A Senha é requerida!")]  Password Password, 
-        [Required(ErrorMessage = "O Email é requerido!")]  Email Email);
-    public record UsuarioOutputDto(Guid Id, string Nome, TipoUsuarioEnum TipoUsuarioEnum, Email Email);
+    public record UsuarioInputDto(
+        Guid? Id,
+        [Required(ErrorMessage = "O nome é requerido!")] string Name,
+        [Required(ErrorMessage = "o Tipo é requerido!")] TipoUsuarioEnum TipoUsuario, 
+        [Required(ErrorMessage = "A Senha é requerida!")] Password Password, 
+        [Required(ErrorMessage = "O Email é requerido!")] Email Email
+    );
+
+    public record UsuarioOutputDto(Guid Id, string Name, TipoUsuarioEnum TipoUsuario, Email Email);
 
     public record EmpresaInputDto(string RazaoSocial, Email Email, string Endereco, string Celular, string Telefone, int Risco);
     public record EmpresaOutputDto(Guid Id, string RazaoSocial, Email Email, string Endereco, string Celular, string Telefone, int Risco);

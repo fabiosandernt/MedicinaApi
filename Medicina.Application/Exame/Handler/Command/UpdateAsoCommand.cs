@@ -12,7 +12,6 @@ namespace Medicina.Application.Exame.Handler.Command
     {
         public AsoInputDto Aso { get; set; }
 
-
         public UpdateAsoCommand(AsoInputDto aso)
         {
             Aso = aso;

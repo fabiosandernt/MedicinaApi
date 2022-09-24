@@ -29,5 +29,13 @@ namespace Medicina.Domain.Account
         public void Validate() =>
             new UsuarioValidator().ValidateAndThrow(this);
 
+        public void Update(string name, Email email, Password password, TipoUsuarioEnum tipoUsuario)
+        {
+            Name = name;
+            Email = email;
+            Password = password;
+            TipoUsuario = tipoUsuario;
+        }
+
     }
 }

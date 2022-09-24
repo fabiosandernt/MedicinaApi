@@ -58,5 +58,15 @@ namespace Medicina.Repository.Database
             this.Query.Update(entity);
             await this.Context.SaveChangesAsync();
         }
+
+        public async ValueTask<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        {
+            return await Query.AnyAsync(expression);
+        }
+
+        public async ValueTask<T> GetbyExpressionAsync(Expression<Func<T, bool>> expression)
+        {
+            return await Query.FirstOrDefaultAsync(expression);
+        }
     }
 }
