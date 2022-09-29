@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Medicina.CrossCutting.Utils;
-using Medicina.Domain.Account.Repository;
 using Microsoft.AspNetCore.Mvc;
+using static Medicina.Application.Exame.Dto.UsuarioDto;
 
 namespace Medicina.Api.Controller
 {

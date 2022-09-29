@@ -3,6 +3,7 @@ using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Microsoft.AspNetCore.Mvc;
+using static Medicina.Application.Exame.Dto.EmpresaDto;
 
 namespace Medicina.Api.Controller
 {

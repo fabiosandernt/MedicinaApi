@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using Medicina.Application.Exame.Dto;
 using Medicina.Domain.Account.Repository;
-using Medicina.Domain.Exame.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Medicina.Application.Exame.Dto.UsuarioDto;
 
 namespace Medicina.Application.Exame.Service
 {
