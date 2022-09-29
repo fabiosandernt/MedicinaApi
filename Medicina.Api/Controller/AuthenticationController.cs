@@ -16,9 +16,9 @@ namespace Medicina.Api.Controller
         private string issuer = "";
 
         [HttpPost]
-        public IActionResult Token([FromForm] string username, [FromForm] string password)
+        public IActionResult Token([FromForm] string email, [FromForm] string password)
         {
-            var isLogged = this.AuthenticateUser(username, password);
+            var isLogged = this.AuthenticateUser(email, password);
 
             if (!isLogged)
                 return Unauthorized();
@@ -26,11 +26,11 @@ namespace Medicina.Api.Controller
             return Ok(GenerateToken());
         }
 
-        private bool AuthenticateUser(string username, string password)
+        private bool AuthenticateUser(string email, string password)
         {
             //Vai na base de dados, caso esteja logado return true;
 
-            if (username == "admin" && password == "1234")
+            if (email == "admin" && password == "1234")
                 return true;
 
             return false;

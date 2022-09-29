@@ -9,6 +9,7 @@ namespace Medicina.Api.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class EmpresaController : ControllerBase
     {
         private readonly IMediator mediator;

@@ -17,7 +17,7 @@ namespace Medicina.Domain.Cadastro
         public DateTime? DataNascimento { get; set; }
         public string Funcao { get; set; }
         public string MatriculaEsocial { get; set; }        
-        public IList<Empresa> Empresas { get; set; }
-        public IList<Aso> Asos { get; set; }
+        public virtual IList<Empresa> Empresas { get; set; }
+        public virtual IList<Aso> Asos { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Medicina.Domain.Cadastro
         public string Celular { get; set; }
         public string Telefone { get; set; }
         public int Risco { get; set; }
-        public IList<Funcionario> Funcionarios { get; set; }
+        public virtual IList<Funcionario> Funcionarios { get; set; }
         public Usuario Usuario { get; set; }
         public Guid UsuarioId { get; set; }
     }
