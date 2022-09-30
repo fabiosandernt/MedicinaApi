@@ -22,21 +22,6 @@ namespace Medicina.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EmpresaFuncionario", b =>
-                {
-                    b.Property<Guid>("EmpresasId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FuncionariosId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("EmpresasId", "FuncionariosId");
-
-                    b.HasIndex("FuncionariosId");
-
-                    b.ToTable("EmpresaFuncionario");
-                });
-
             modelBuilder.Entity("Medicina.Domain.Account.Usuario", b =>
                 {
                     b.Property<Guid>("Id")
@@ -106,6 +91,9 @@ namespace Medicina.Repository.Migrations
                     b.Property<DateTime?>("DataNascimento")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("EmpresaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Funcao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -131,6 +119,8 @@ namespace Medicina.Repository.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
 
                     b.ToTable("Funcionario", (string)null);
                 });
@@ -159,22 +149,7 @@ namespace Medicina.Repository.Migrations
 
                     b.HasIndex("FuncionarioId");
 
-                    b.ToTable("Aso");
-                });
-
-            modelBuilder.Entity("EmpresaFuncionario", b =>
-                {
-                    b.HasOne("Medicina.Domain.Cadastro.Empresa", null)
-                        .WithMany()
-                        .HasForeignKey("EmpresasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Medicina.Domain.Cadastro.Funcionario", null)
-                        .WithMany()
-                        .HasForeignKey("FuncionariosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Aso", (string)null);
                 });
 
             modelBuilder.Entity("Medicina.Domain.Account.Usuario", b =>
@@ -256,6 +231,17 @@ namespace Medicina.Repository.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Medicina.Domain.Cadastro.Funcionario", b =>
+                {
+                    b.HasOne("Medicina.Domain.Cadastro.Empresa", "Empresa")
+                        .WithMany("Funcionarios")
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empresa");
+                });
+
             modelBuilder.Entity("Medicina.Domain.Exame.Aso", b =>
                 {
                     b.HasOne("Medicina.Domain.Cadastro.Funcionario", "Funcionario")
@@ -270,6 +256,11 @@ namespace Medicina.Repository.Migrations
             modelBuilder.Entity("Medicina.Domain.Account.Usuario", b =>
                 {
                     b.Navigation("Empresas");
+                });
+
+            modelBuilder.Entity("Medicina.Domain.Cadastro.Empresa", b =>
+                {
+                    b.Navigation("Funcionarios");
                 });
 
             modelBuilder.Entity("Medicina.Domain.Cadastro.Funcionario", b =>

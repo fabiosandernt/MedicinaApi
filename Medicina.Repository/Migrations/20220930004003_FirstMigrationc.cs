@@ -5,28 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Medicina.Repository.Migrations
 {
-    public partial class CreateMigration : Migration
+    public partial class FirstMigrationc : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Funcionario",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Setor = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    Pis = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Funcao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MatriculaEsocial = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Funcionario", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
@@ -40,27 +22,6 @@ namespace Medicina.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Aso",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TipoExame = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataExame = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Imagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FuncionarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Aso", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Aso_Funcionario_FuncionarioId",
-                        column: x => x.FuncionarioId,
-                        principalTable: "Funcionario",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,24 +49,46 @@ namespace Medicina.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmpresaFuncionario",
+                name: "Funcionario",
                 columns: table => new
                 {
-                    EmpresasId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FuncionariosId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Setor = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Pis = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Funcao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MatriculaEsocial = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmpresaFuncionario", x => new { x.EmpresasId, x.FuncionariosId });
+                    table.PrimaryKey("PK_Funcionario", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmpresaFuncionario_Empresa_EmpresasId",
-                        column: x => x.EmpresasId,
+                        name: "FK_Funcionario_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
                         principalTable: "Empresa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Aso",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TipoExame = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataExame = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Imagem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FuncionarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Aso", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmpresaFuncionario_Funcionario_FuncionariosId",
-                        column: x => x.FuncionariosId,
+                        name: "FK_Aso_Funcionario_FuncionarioId",
+                        column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -122,9 +105,9 @@ namespace Medicina.Repository.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmpresaFuncionario_FuncionariosId",
-                table: "EmpresaFuncionario",
-                column: "FuncionariosId");
+                name: "IX_Funcionario_EmpresaId",
+                table: "Funcionario",
+                column: "EmpresaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -133,13 +116,10 @@ namespace Medicina.Repository.Migrations
                 name: "Aso");
 
             migrationBuilder.DropTable(
-                name: "EmpresaFuncionario");
+                name: "Funcionario");
 
             migrationBuilder.DropTable(
                 name: "Empresa");
-
-            migrationBuilder.DropTable(
-                name: "Funcionario");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

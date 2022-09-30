@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Medicina.Domain.Cadastro
 {
-    public class Empresa: Entity<Guid>
+    public class Empresa : Entity<Guid>
     {
-     
+
         public string RazaoSocial { get; set; }
         public Email Email { get; set; }
         public string Endereco { get; set; }
         public string Celular { get; set; }
         public string Telefone { get; set; }
         public int Risco { get; set; }
-        public virtual IList<Funcionario> Funcionarios { get; set; }
-        public Usuario Usuario { get; set; }
         public Guid UsuarioId { get; set; }
+        public Usuario Usuario { get; set; }
+        public virtual IList<Funcionario> Funcionarios { get; set; }
     }
 }

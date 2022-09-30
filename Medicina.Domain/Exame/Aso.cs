@@ -13,8 +13,8 @@ namespace Medicina.Domain.Exame
         public string TipoExame { get; set; }
         public DateTime? DataExame { get; set; }
         public string Imagem { get; set; }
-        public Funcionario Funcionario { get; set; }
         public Guid FuncionarioId { get; set; }
-
+        public Funcionario Funcionario { get; set; }
+        
     }
 }

@@ -17,7 +17,8 @@ namespace Medicina.Repository.Mapping
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Name).IsRequired().HasMaxLength(200);
-
+            builder.Property(x => x.TipoUsuario).IsRequired();
+                        
             builder.OwnsOne(x => x.Password, p =>
             {
                 p.Property(f => f.Valor).HasColumnName("Password").IsRequired();
@@ -27,6 +28,8 @@ namespace Medicina.Repository.Mapping
             {
                 p.Property(f => f.Valor).HasColumnName("Email").IsRequired().HasMaxLength(1024);
             });
+
+            builder.HasMany(p => p.Empresas).WithOne(p => p.Usuario);
 
         }
     }

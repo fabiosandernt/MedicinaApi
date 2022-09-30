@@ -21,6 +21,7 @@ namespace Medicina.Repository.Mapping
             builder.Property(x => x.MatriculaEsocial).IsRequired().HasMaxLength(200);
             builder.Property(x => x.Setor).IsRequired().HasMaxLength(60);
 
+            builder.HasMany(x => x.Asos).WithOne(x => x.Funcionario);
         }
     }
 }
