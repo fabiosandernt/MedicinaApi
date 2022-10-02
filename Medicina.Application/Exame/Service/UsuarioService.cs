@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
+using Medicina.Domain.Account;
 using Medicina.Domain.Account.Repository;
+using Medicina.Domain.Account.ValueObject;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using static Medicina.Application.Exame.Dto.UsuarioDto;
 
 namespace Medicina.Application.Exame.Service
@@ -72,5 +76,15 @@ namespace Medicina.Application.Exame.Service
             return this.mapper.Map<UsuarioOutputDto>(usuario);
 
         }
+
+        public async Task<UsuarioOutputDto> Logar(UsuarioInputDto dto)
+        {
+            if (!dto.Id.HasValue) throw new Exception("Usuário ou senha incorreto");
+
+            var usuario = await _usuarioRepository.GetbyExpressionAsync(x => x.Email.Valor == dto.Email.Valor && x.Password.Valor == dto.Password.Valor);
+
+            return this.mapper.Map<UsuarioOutputDto>(usuario);
+        }
+
     }
 }

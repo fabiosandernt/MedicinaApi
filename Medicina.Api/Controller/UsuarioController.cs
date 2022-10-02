@@ -2,6 +2,7 @@
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Medicina.CrossCutting.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Medicina.Application.Exame.Dto.UsuarioDto;
 
@@ -19,10 +20,12 @@ namespace Medicina.Api.Controller
             this.mediator = mediator;
         }
 
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await this.mediator.Send(new GetAllUsuarioQuery()));
+            var result = await this.mediator.Send(new GetAllUsuarioQuery());
+            return Ok(result);
         }
 
         [HttpGet("{id:guid}/ObterPorId")]

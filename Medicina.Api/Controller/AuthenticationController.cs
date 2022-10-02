@@ -1,9 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Medicina.Application.Exame.Dto;
+using Medicina.Application.Exame.Handler.Command;
+using Medicina.Application.Exame.Handler.Query;
+using Medicina.CrossCutting.Utils;
+using Medicina.Domain.Account.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using static Medicina.Application.Exame.Dto.UsuarioDto;
 
 namespace Medicina.Api.Controller
 {
@@ -15,6 +23,13 @@ namespace Medicina.Api.Controller
         private string audience = "medicina-api";
         private string issuer = "";
 
+        private readonly IUsuarioRepository _usuarioRepository;
+
+        public AuthenticationController(IUsuarioRepository usuarioRepository)
+        {
+            _usuarioRepository = usuarioRepository;
+        }
+      
         [HttpPost]
         public IActionResult Token([FromForm] string email, [FromForm] string password)
         {
@@ -28,9 +43,11 @@ namespace Medicina.Api.Controller
 
         private bool AuthenticateUser(string email, string password)
         {
-            //Vai na base de dados, caso esteja logado return true;
+            //Vai na base de dados, caso esteja logado return true;                                 
 
-            if (email == "admin" && password == "1234")
+            var databaseUser = _usuarioRepository.GetbyExpressionAsync(x => x.Email.Valor == email && x.Password.Valor == password);
+            
+            if (databaseUser.Result.Email.Valor == email && databaseUser.Result.Password.Valor == password)
                 return true;
 
             return false;

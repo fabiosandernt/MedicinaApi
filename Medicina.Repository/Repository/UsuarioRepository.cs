@@ -21,7 +21,7 @@ namespace Medicina.Repository.Repository
 
         public async Task<IEnumerable<Usuario>> ObterTodosUsuarios()
         {
-            return await this.Query.Include(x => x.Name).ToListAsync();
+            return await this.Query.ToListAsync();
         }
     }
 }
