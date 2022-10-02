@@ -4,6 +4,7 @@ using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using static Medicina.Application.Exame.Dto.AsoDto;
 
 
 namespace Medicina.Api.Controller

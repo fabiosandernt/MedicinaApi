@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Medicina.Application.Exame.Dto;
 using Medicina.Domain.Exame.Repository;
-
+using static Medicina.Application.Exame.Dto.AsoDto;
 
 namespace Medicina.Application.Exame.Service
 {

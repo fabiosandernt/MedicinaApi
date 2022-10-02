@@ -1,4 +1,5 @@
 ﻿using Medicina.Application.Exame.Dto;
+using static Medicina.Application.Exame.Dto.AsoDto;
 
 namespace Medicina.Application.Exame.Service
 {
