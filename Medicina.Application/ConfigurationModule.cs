@@ -5,7 +5,7 @@ using Medicina.Application.Exame.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Collections.Generic;
+using Medicina.Application.AzureBlob;
 
 namespace Medicina.Application
 {
@@ -22,7 +22,7 @@ namespace Medicina.Application
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             
-            //services.AddScoped<AzureBlobStorage>();
+            services.AddScoped<AzureBlobStorage>();
 
             services.AddHttpClient();
 

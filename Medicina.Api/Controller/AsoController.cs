@@ -3,13 +3,14 @@ using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 
 namespace Medicina.Api.Controller
 {
     [Route("api/controller")]
     [ApiController]
-    //[Authorize]
+   
     public class AsoController : ControllerBase
     {
         private readonly IMediator mediator;

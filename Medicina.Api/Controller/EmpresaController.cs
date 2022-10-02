@@ -4,9 +4,10 @@ using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Medicina.CrossCutting.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Medicina.Application.Exame.Dto.EmpresaDto;
-using static Medicina.Application.Exame.Dto.EmpresaDto;
+
 
 namespace Medicina.Api.Controller
 {
@@ -34,7 +35,7 @@ namespace Medicina.Api.Controller
             return Ok(await this.mediator.Send(new GetEmpresaQuery(id)));
         }
 
-        //[AllowAnonymous]
+        
         [HttpPost()]
         public async Task<IActionResult> Criar(EmpresaInputDto dto)
         {

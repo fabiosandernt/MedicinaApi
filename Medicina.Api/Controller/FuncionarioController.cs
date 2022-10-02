@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
@@ -34,7 +35,7 @@ namespace Medicina.Api.Controller
             return Ok(await this.mediator.Send(new GetFuncionarioQuery(id)));
         }
 
-        //[AllowAnonymous]
+    
         [HttpPost()]
         public async Task<IActionResult> Criar(FuncionarioInputDto dto)
         {

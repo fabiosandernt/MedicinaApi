@@ -11,9 +11,9 @@ namespace Medicina.Application.Exame.Handler.Query
     public class GetAsoQuery: IRequest<GetAsoQueryResponse>
     {
         public Guid IdAso { get; set; }
-        public GetAsoQuery(Guid idAso)
+        public GetAsoQuery(Guid id)
         {
-            IdAso = idAso;
+            IdAso = id;
         }
     }
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Medicina.Application.AzureBlobStorage
+namespace Medicina.Application.AzureBlob
 {
     public class AzureBlobStorage
     {
