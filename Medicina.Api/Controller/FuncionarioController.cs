@@ -34,7 +34,7 @@ namespace Medicina.Api.Controller
             return Ok(await this.mediator.Send(new GetFuncionarioQuery(id)));
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost()]
         public async Task<IActionResult> Criar(FuncionarioInputDto dto)
         {

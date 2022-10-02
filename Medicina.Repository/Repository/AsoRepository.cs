@@ -20,7 +20,7 @@ namespace Medicina.Repository.Repository
 
         public async Task<IEnumerable<Aso>> ObterTodosAsos()
         {
-            return await this.Query.ToListAsync();
+            return await this.Query.Include(x => x.Funcionario).ToListAsync();
         }
     }
 }

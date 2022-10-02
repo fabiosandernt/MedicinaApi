@@ -1,11 +1,11 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Medicina.Application.Exame.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 
 namespace Medicina.Application
 {
@@ -21,8 +21,63 @@ namespace Medicina.Application
             services.AddScoped<IEmpresaService, EmpresaService>();
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            
+            //services.AddScoped<AzureBlobStorage>();
+
+            services.AddHttpClient();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters()
+                        {
+                            ValidateIssuer = false,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+                            ValidateAudience = false,
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("FBAs3rR4yTLuQP7d8WeJ"))
+                        };
+                    });
+
+            var info = new OpenApiInfo();
+            info.Version = "V1";
+            info.Title = "API Projeto Medicina";
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", info);
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Insira o token JWT desta maneira : Bearer {seu token}",
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In= ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                });
+            });
 
             return services;
+
         }
     }
 }

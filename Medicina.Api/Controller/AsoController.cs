@@ -35,7 +35,7 @@ namespace Medicina.Api.Controller
         public async Task<IActionResult> Criar(AsoInputDto dto)
         {
             var result = await this.mediator.Send(new CreateAsoCommand(dto));
-            return Created($"{result.Aso.FuncionarioId}", result.Aso);
+            return Created($"{result.Aso.Id}", result.Aso);
         }
 
         [HttpPut()]
