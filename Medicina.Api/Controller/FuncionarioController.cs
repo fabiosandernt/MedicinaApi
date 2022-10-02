@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Medicina.Application.Exame.Dto.FuncionarioDto;
 
+
 namespace Medicina.Api.Controller
 {
     
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class FuncionarioController : ControllerBase
@@ -35,7 +36,7 @@ namespace Medicina.Api.Controller
             return Ok(await this.mediator.Send(new GetFuncionarioQuery(id)));
         }
 
-    
+
         [HttpPost()]
         public async Task<IActionResult> Criar(FuncionarioInputDto dto)
         {
@@ -49,8 +50,8 @@ namespace Medicina.Api.Controller
             catch (Exception e)
             {
                 return BadRequest(new ApiResponseError(e.Message));
-            }            
-           
+            }
+
         }
 
         [HttpPut()]

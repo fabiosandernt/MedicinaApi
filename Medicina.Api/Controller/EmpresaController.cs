@@ -11,7 +11,7 @@ using static Medicina.Application.Exame.Dto.EmpresaDto;
 
 namespace Medicina.Api.Controller
 {
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class EmpresaController : ControllerBase

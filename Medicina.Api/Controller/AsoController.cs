@@ -9,7 +9,7 @@ using static Medicina.Application.Exame.Dto.AsoDto;
 
 namespace Medicina.Api.Controller
 {
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     [ApiController]
    
     public class AsoController : ControllerBase
