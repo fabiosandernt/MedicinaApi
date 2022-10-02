@@ -1,23 +1,18 @@
 ﻿using MediatR;
-using Medicina.Application.Exame.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Medicina.Application.Exame.Dto.UsuarioDto;
+
+using static Medicina.Application.Exame.Dto.FuncionarioDto;
 
 namespace Medicina.Application.Exame.Handler.Query
 {
-    public class GetAllFuncionarioQuery : IRequest<GetAllUsuarioQueryResponse>
+    public class GetAllFuncionarioQuery : IRequest<GetAllFuncionarioQueryResponse>
     {
     }
 
     public class GetAllFuncionarioQueryResponse
     {
-        public IList<UsuarioOutputDto> Funcionarios { get; set; }
+        public IList<FuncionarioOutputDto> Funcionarios { get; set; }
 
-        public GetAllFuncionarioQueryResponse(IList<UsuarioOutputDto> funcionarios)
+        public GetAllFuncionarioQueryResponse(IList<FuncionarioOutputDto> funcionarios)
         {
             Funcionarios = funcionarios;
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Medicina.Application.Exame.Handler.Command
 {
-    public class UpdateAsoCommand : IRequest<CreateAsoCommandResponse>
+    public class UpdateAsoCommand : IRequest<UpdateAsoCommandResponse>
     {
         public AsoInputDto Aso { get; set; }
 

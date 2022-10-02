@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 namespace Medicina.Application.Exame.Handler
 {
     public class UsuarioHandler : IRequestHandler<CreateUsuarioCommand, CreateUsuarioCommandResponse>,
-                                IRequestHandler<UpdateUsuarioCommand, UpdateUsuarioCommandResponse>,
-                                IRequestHandler<DeleteUsuarioCommand, DeleteUsuarioCommandResponse>,
-                                IRequestHandler<GetAllUsuarioQuery, GetAllUsuarioQueryResponse>,
-                                IRequestHandler<GetUsuarioQuery, GetUsuarioQueryResponse>
+                                  IRequestHandler<UpdateUsuarioCommand, UpdateUsuarioCommandResponse>,
+                                  IRequestHandler<DeleteUsuarioCommand, DeleteUsuarioCommandResponse>,
+                                  IRequestHandler<GetAllUsuarioQuery, GetAllUsuarioQueryResponse>,
+                                  IRequestHandler<GetUsuarioQuery, GetUsuarioQueryResponse>
 
     {
         private readonly IUsuarioService _usuarioService;
