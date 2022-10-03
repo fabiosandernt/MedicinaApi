@@ -1,11 +1,13 @@
 ﻿using Medicina.CrossCutting.Entity;
 using Medicina.Domain.Account;
 using Medicina.Domain.Account.ValueObject;
+using Medicina.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Medicina.Domain.Cadastro
 {
@@ -21,5 +23,6 @@ namespace Medicina.Domain.Cadastro
         public Guid UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
         public virtual IList<Funcionario> Funcionarios { get; set; }
+                
     }
 }

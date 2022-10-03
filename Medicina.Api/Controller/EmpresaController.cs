@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Medicina.Application.Exame.Dto.EmpresaDto;
-
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Medicina.Domain.Account.ValueObject;
+using Microsoft.AspNetCore.Identity;
 
 namespace Medicina.Api.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class EmpresaController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -26,6 +29,7 @@ namespace Medicina.Api.Controller
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            
             return Ok(await this.mediator.Send(new GetAllEmpresaQuery()));
         }
 
@@ -43,6 +47,8 @@ namespace Medicina.Api.Controller
 
             try
             {
+                
+
                 var result = await this.mediator.Send(new CreateEmpresaCommand(dto));
                 return Created($"{result.Empresa.Id}", result.Empresa);
             }

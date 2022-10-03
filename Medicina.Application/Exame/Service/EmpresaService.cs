@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using Medicina.Application.Exame.Dto;
-using Medicina.Domain.Cadastro;
 using Medicina.Domain.Cadastro.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using static Medicina.Application.Exame.Dto.EmpresaDto;
 
 namespace Medicina.Application.Exame.Service
@@ -24,7 +18,7 @@ namespace Medicina.Application.Exame.Service
 
         public async Task<EmpresaOutputDto> Criar(EmpresaInputDto dto)
         {
-            var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);
+            var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);                     
 
             await this.empresaRepository.Save(empresa);
 

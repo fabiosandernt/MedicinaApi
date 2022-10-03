@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Medicina.Application;
 using Medicina.Repository;
-
+using Microsoft.AspNetCore.Builder;
 
 namespace Medicina.Api
 {
@@ -29,7 +29,8 @@ namespace Medicina.Api
            
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 

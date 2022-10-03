@@ -19,6 +19,7 @@ namespace Medicina.Application.Exame.Service
             this.mapper = mapper;
         }
 
+        
         public async Task<UsuarioOutputDto> Criar(UsuarioInputDto dto)
         {
             if (await _usuarioRepository.AnyAsync(x => x.Email.Valor == dto.Email.Valor))
