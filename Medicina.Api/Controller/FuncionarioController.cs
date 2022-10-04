@@ -14,7 +14,7 @@ namespace Medicina.Api.Controller
     
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class FuncionarioController : ControllerBase
     {
         private readonly IMediator mediator;

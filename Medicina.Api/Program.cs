@@ -29,18 +29,19 @@ namespace Medicina.Api
            
                 app.UseSwagger();
                 app.UseSwaggerUI();
-
-            app.UseCors("CorsPolicy");
+                        
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
             app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.MapControllers();
+            app.MapControllers();                      
 
             app.Run();
 

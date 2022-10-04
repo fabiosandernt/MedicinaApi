@@ -5,13 +5,13 @@ using Medicina.Application.Exame.Handler.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using static Medicina.Application.Exame.Dto.AsoDto;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Medicina.Api.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-   
+    [Authorize]
     public class AsoController : ControllerBase
     {
         private readonly IMediator mediator;

@@ -32,6 +32,7 @@ namespace Medicina.Application
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
+                
                 );
             });
 

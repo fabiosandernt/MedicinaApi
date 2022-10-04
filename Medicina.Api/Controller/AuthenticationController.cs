@@ -31,9 +31,9 @@ namespace Medicina.Api.Controller
         }
       
         [HttpPost]
-        public IActionResult Token([FromForm] string email, [FromForm] string password)
+        public IActionResult Token([FromBody] LoginDto dto)
         {
-            var isLogged = this.AuthenticateUser(email, password);
+            var isLogged = this.AuthenticateUser(dto.Email, dto.Password);
 
             if (!isLogged)
                 return Unauthorized();
