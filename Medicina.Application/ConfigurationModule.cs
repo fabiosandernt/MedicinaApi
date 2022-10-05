@@ -6,12 +6,19 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Medicina.Application.AzureBlob;
+using Medicina.CrossCutting.JwtService.Contracts;
+using Medicina.CrossCutting.JwtService;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 
 namespace Medicina.Application
 {
     public static class ConfigurationModule
     {
-        public static IServiceCollection RegisterApplication(this IServiceCollection services)
+        public static IServiceCollection RegisterApplication(
+            this IServiceCollection services,
+            IConfiguration configuration
+        )
         {
             services.AddAutoMapper(typeof(Application.ConfigurationModule).Assembly);
 
@@ -24,6 +31,8 @@ namespace Medicina.Application
             
             services.AddScoped<AzureBlobStorage>();
 
+            services.AddScoped<IJwtService, JwtService>();
+
             services.AddHttpClient();
 
             services.AddCors(options =>
@@ -32,22 +41,26 @@ namespace Medicina.Application
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                
                 );
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                        options.TokenValidationParameters = new TokenValidationParameters()
-                        {
-                            ValidateIssuer = false,
-                            ValidateLifetime = true,
-                            ValidateIssuerSigningKey = true,
-                            ValidateAudience = false,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("FBAs3rR4yTLuQP7d8WeJ"))
-                        };
-                    });
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JwtSecurity:SecurityKey"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true
+                };
+            });
 
             var info = new OpenApiInfo();
             info.Version = "V1";

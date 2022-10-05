@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Medicina.Application.Exame.Service;
@@ -14,7 +15,8 @@ namespace Medicina.Application.Exame.Handler
                                   IRequestHandler<UpdateUsuarioCommand, UpdateUsuarioCommandResponse>,
                                   IRequestHandler<DeleteUsuarioCommand, DeleteUsuarioCommandResponse>,
                                   IRequestHandler<GetAllUsuarioQuery, GetAllUsuarioQueryResponse>,
-                                  IRequestHandler<GetUsuarioQuery, GetUsuarioQueryResponse>
+                                  IRequestHandler<GetUsuarioQuery, GetUsuarioQueryResponse>,
+                                  IRequestHandler<LoginDto, string>
 
     {
         private readonly IUsuarioService _usuarioService;
@@ -50,8 +52,13 @@ namespace Medicina.Application.Exame.Handler
 
         public async Task<GetUsuarioQueryResponse> Handle(GetUsuarioQuery request, CancellationToken cancellationToken)
         {
-            var result = await this._usuarioService.ObterPorId(request.IdUsuario);
+            var result = await _usuarioService.ObterPorId(request.IdUsuario);
             return new GetUsuarioQueryResponse(result);
+        }
+
+        public async Task<string> Handle(LoginDto request, CancellationToken cancellationToken)
+        {
+            return await _usuarioService.ObterTokenJwtAsync(request);
         }
     }
 

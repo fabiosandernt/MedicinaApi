@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Medicina.Application.Exame.Dto;
+using Medicina.CrossCutting.JwtService.Contracts;
+using Medicina.CrossCutting.JwtService.Dto;
 using Medicina.Domain.Account;
 using Medicina.Domain.Account.Repository;
 using Medicina.Domain.Account.ValueObject;
@@ -12,11 +15,17 @@ namespace Medicina.Application.Exame.Service
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMapper mapper;
+        private readonly IJwtService _jwtService;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
+        public UsuarioService(
+            IUsuarioRepository usuarioRepository,
+            IMapper mapper,
+            IJwtService jwtService
+        )
         {
             this._usuarioRepository = usuarioRepository;
             this.mapper = mapper;
+            _jwtService = jwtService;
         }
 
         
@@ -78,14 +87,12 @@ namespace Medicina.Application.Exame.Service
 
         }
 
-        public async Task<UsuarioOutputDto> Logar(UsuarioInputDto dto)
+        public async Task<string> ObterTokenJwtAsync(LoginDto dto)
         {
-            if (!dto.Id.HasValue) throw new Exception("Usuário ou senha incorreto");
+            var usuario = await _usuarioRepository.GetbyExpressionAsync(x => x.Email.Valor == dto.Email && x.Password.Valor == dto.Password);
+            if (usuario is null) throw new Exception("Usuário não encontrado");
 
-            var usuario = await _usuarioRepository.GetbyExpressionAsync(x => x.Email.Valor == dto.Email.Valor && x.Password.Valor == dto.Password.Valor);
-
-            return this.mapper.Map<UsuarioOutputDto>(usuario);
+            return await _jwtService.GenerateToken(new JwtDto(usuario.Id, usuario.Email?.Valor));
         }
-
     }
 }

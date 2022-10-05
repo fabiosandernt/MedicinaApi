@@ -20,7 +20,7 @@ namespace Medicina.Application.Exame.Handler
 
         public async Task<CreateEmpresaCommandResponse> Handle(CreateEmpresaCommand request, CancellationToken cancellationToken)
         {
-            var result = await this._empresaService.Criar(request.Empresa);
+            var result = await this._empresaService.Criar(request.Empresa, request.IdUsuario);
             return new CreateEmpresaCommandResponse(result);
         }
 

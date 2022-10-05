@@ -12,10 +12,12 @@ namespace Medicina.Domain.Account.ValueObject
         {
 
         }
+
         public Email(string email)
         {
-            this.Valor = email ?? throw new ArgumentNullException(nameof(email));
+            Valor = email ?? throw new ArgumentNullException(nameof(email));
         }
+
         public string Valor { get; set; }
     }
 }

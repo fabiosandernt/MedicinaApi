@@ -16,7 +16,7 @@ namespace Medicina.Api
 
             builder.Services.AddControllers();
             builder.Services
-                   .RegisterApplication()
+                   .RegisterApplication(builder.Configuration)
                    .RegisterRepository(builder.Configuration.GetConnectionString("MedicinaApi"));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,9 +26,8 @@ namespace Medicina.Api
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-           
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            app.UseSwagger();
+            app.UseSwaggerUI();
                         
 
             app.UseHttpsRedirection();

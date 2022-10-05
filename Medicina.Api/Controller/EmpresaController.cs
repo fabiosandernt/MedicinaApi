@@ -1,16 +1,13 @@
 ﻿using MediatR;
-using Medicina.Application.Exame.Dto;
 using Medicina.Application.Exame.Handler.Command;
 using Medicina.Application.Exame.Handler.Query;
 using Medicina.CrossCutting.Utils;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Medicina.Application.Exame.Dto.EmpresaDto;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
-using Medicina.Domain.Account.ValueObject;
-using Microsoft.AspNetCore.Identity;
+using Medicina.CrossCutting.JwtService.Contracts;
 
 namespace Medicina.Api.Controller
 {
@@ -20,10 +17,12 @@ namespace Medicina.Api.Controller
     public class EmpresaController : ControllerBase
     {
         private readonly IMediator mediator;
+        private readonly IJwtService _jwtService;
 
-        public EmpresaController(IMediator mediator)
+        public EmpresaController(IMediator mediator, IJwtService jwtService)
         {
             this.mediator = mediator;
+            _jwtService = jwtService;
         }
 
         [HttpGet]
@@ -47,9 +46,12 @@ namespace Medicina.Api.Controller
 
             try
             {
-                
+                var token = await HttpContext.GetTokenAsync("access_token");
+                var jwtTokenVm = await _jwtService.ReadTokenAsync(token);
+                if (jwtTokenVm is null) return Unauthorized();
 
-                var result = await this.mediator.Send(new CreateEmpresaCommand(dto));
+                var result = await this.mediator.Send(new CreateEmpresaCommand(dto) { IdUsuario = jwtTokenVm.Id });
+                
                 return Created($"{result.Empresa.Id}", result.Empresa);
             }
             catch (Exception e)

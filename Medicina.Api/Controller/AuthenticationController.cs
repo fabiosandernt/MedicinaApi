@@ -19,60 +19,32 @@ namespace Medicina.Api.Controller
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private string jwtsecret = "FBAs3rR4yTLuQP7d8WeJ";
-        private string audience = "medicina-api";
-        private string issuer = "";
+        private readonly IMediator _mediator;
 
-        private readonly IUsuarioRepository _usuarioRepository;
-
-        public AuthenticationController(IUsuarioRepository usuarioRepository)
+        public AuthenticationController(IMediator mediator)
         {
-            _usuarioRepository = usuarioRepository;
+            _mediator = mediator;
         }
       
         [HttpPost]
-        public IActionResult Token([FromBody] LoginDto dto)
+        public async Task<IActionResult> Token([FromBody] LoginDto dto)
         {
-            var isLogged = this.AuthenticateUser(dto.Email, dto.Password);
+            if (dto is null) return UnprocessableEntity();
 
-            if (!isLogged)
-                return Unauthorized();
-
-            return Ok(GenerateToken());
-        }
-
-        private bool AuthenticateUser(string email, string password)
-        {
-            //Vai na base de dados, caso esteja logado return true;                                 
-
-            var databaseUser = _usuarioRepository.GetbyExpressionAsync(x => x.Email.Valor == email && x.Password.Valor == password);
-            
-            if (databaseUser.Result.Email.Valor == email && databaseUser.Result.Password.Valor == password)
-                return true;
-
-            return false;
-        }
-        private string GenerateToken()
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtsecret));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
+            try
             {
-                new Claim(JwtRegisteredClaimNames.Name, "Fabio"),
-                new Claim("role","Admin")
-            };
+                var result = await _mediator.Send(dto);
 
-            var token = new JwtSecurityToken(issuer,
-               audience,
-               claims,
-               expires: DateTime.Now.AddMinutes(15),
-               signingCredentials: credentials);
+                if (string.IsNullOrWhiteSpace(result)) 
+                    return Unauthorized("Usuário ou senha inválidos");
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new ApiResponseError(e.Message));
+            }
         }
-
     }
 
 }

@@ -19,10 +19,10 @@ namespace Medicina.Application.Exame.Service
             this.mapper = mapper;
         }
 
-        public async Task<EmpresaOutputDto> Criar(EmpresaInputDto dto)
+        public async Task<EmpresaOutputDto> Criar(EmpresaInputDto dto, Guid usuarioId)
         {
             var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);
-            
+            empresa.UsuarioId = usuarioId;
             await this.empresaRepository.Save(empresa);
 
             return this.mapper.Map<EmpresaOutputDto>(empresa);

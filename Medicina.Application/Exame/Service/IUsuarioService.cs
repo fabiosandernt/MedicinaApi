@@ -1,4 +1,5 @@
-﻿using Medicina.Domain.Account;
+﻿using Medicina.Application.Exame.Dto;
+using Medicina.Domain.Account;
 using System.Linq.Expressions;
 using static Medicina.Application.Exame.Dto.UsuarioDto;
 
@@ -11,7 +12,7 @@ namespace Medicina.Application.Exame.Service
         Task<UsuarioOutputDto> Atualizar(UsuarioInputDto dto);
         Task<UsuarioOutputDto> Deletar(UsuarioInputDto dto);
         Task<UsuarioOutputDto> ObterPorId(Guid id);
-        //Task<UsuarioOutputDto> Logar(UsuarioInputDto dto);
+        Task<string> ObterTokenJwtAsync(LoginDto dto);
 
     }
 }
