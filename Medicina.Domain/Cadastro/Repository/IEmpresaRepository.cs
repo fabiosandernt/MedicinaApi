@@ -10,5 +10,7 @@ namespace Medicina.Domain.Cadastro.Repository
     public interface IEmpresaRepository: IRepository<Empresa>
     {
         Task<IEnumerable<Empresa>> ObterTodasEmpresas();
+        Task<IEnumerable<Empresa>> ObterTodasEmpresasPorCnpj(string parametro);
+            
     }
 }

@@ -19,7 +19,12 @@ namespace Medicina.Repository.Repository
         }
         public async Task<IEnumerable<Empresa>> ObterTodasEmpresas()
         {
-            return await this.Query.Include(x => x.RazaoSocial).ToListAsync();
+            return await this.Query.Include(x => x.Cnpj).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Empresa>> ObterTodasEmpresasPorCnpj(string cnpj)
+        {
+            return await this.Query.Where(x => x.Cnpj == cnpj).ToListAsync();
         }
 
     }

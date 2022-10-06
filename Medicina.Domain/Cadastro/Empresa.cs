@@ -15,6 +15,7 @@ namespace Medicina.Domain.Cadastro
     {
 
         public string RazaoSocial { get; set; }
+        public string Cnpj { get; set; }
         public Email Email { get; set; }
         public string Endereco { get; set; }
         public string Celular { get; set; }

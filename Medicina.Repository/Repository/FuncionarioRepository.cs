@@ -21,5 +21,12 @@ namespace Medicina.Repository.Repository
         {
             return await this.Query.Include(x => x.Name).ToListAsync();
         }
+
+        public async Task<IEnumerable<Funcionario>> ObterTodosFuncionariosPorCpf(string cpf)
+        {
+            return await this.Query.Where(x => x.Cpf == cpf).ToListAsync();
+        }
+
+       
     }
 }

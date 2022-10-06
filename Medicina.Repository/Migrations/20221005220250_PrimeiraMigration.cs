@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Medicina.Repository.Migrations
 {
-    public partial class FirstMigrationc : Migration
+    public partial class PrimeiraMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace Medicina.Repository.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RazaoSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cnpj = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
                     Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Celular = table.Column<string>(type: "nvarchar(max)", nullable: false),

@@ -74,6 +74,7 @@ namespace Medicina.Application.Exame.Service
 
         public async Task<List<UsuarioOutputDto>> ObterTodos()
         {
+            
             var usuario = await this._usuarioRepository.GetAll();
 
             return this.mapper.Map<List<UsuarioOutputDto>>(usuario);

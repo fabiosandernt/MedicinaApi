@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicina.Repository.Migrations
 {
     [DbContext(typeof(MedicinaContext))]
-    [Migration("20220930004003_FirstMigrationc")]
-    partial class FirstMigrationc
+    [Migration("20221005220250_PrimeiraMigration")]
+    partial class PrimeiraMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,10 @@ namespace Medicina.Repository.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Celular")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnpj")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

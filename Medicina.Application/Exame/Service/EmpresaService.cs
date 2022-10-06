@@ -41,6 +41,7 @@ namespace Medicina.Application.Exame.Service
 
         public async Task<EmpresaOutputDto> Atualizar(EmpresaInputDto dto)
         {
+        
             var empresa = this.mapper.Map<Medicina.Domain.Cadastro.Empresa>(dto);
 
             await this.empresaRepository.Update(empresa);
@@ -51,8 +52,8 @@ namespace Medicina.Application.Exame.Service
 
         public async Task<List<EmpresaOutputDto>> ObterTodos()
         {
+           
             var empresa = await this.empresaRepository.GetAll();
-
             return this.mapper.Map<List<EmpresaOutputDto>>(empresa);
         }
 

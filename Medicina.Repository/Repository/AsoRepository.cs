@@ -22,5 +22,6 @@ namespace Medicina.Repository.Repository
         {
             return await this.Query.ToListAsync();
         }
+
     }
 }
