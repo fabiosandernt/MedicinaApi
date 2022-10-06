@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using static Medicina.Application.Exame.Dto.AsoDto;
 using Microsoft.AspNetCore.Authorization;
+using Medicina.Application.AzureBlob;
+using System.IO;
+using Azure;
+using System.Net.Http;
 
 namespace Medicina.Api.Controller
 {
@@ -15,10 +19,12 @@ namespace Medicina.Api.Controller
     public class AsoController : ControllerBase
     {
         private readonly IMediator mediator;
+        private AzureBlobStorage storage;
 
-        public AsoController(IMediator mediator)
+        public AsoController(IMediator mediator, AzureBlobStorage storage)
         {
             this.mediator = mediator;
+            this.storage = storage;
         }
 
         [HttpGet]
@@ -36,6 +42,8 @@ namespace Medicina.Api.Controller
         [HttpPost()]
         public async Task<IActionResult> Criar(AsoInputDto dto)
         {
+
+            storage.UploadBase64(dto.Imagem, "images");
             var result = await this.mediator.Send(new CreateAsoCommand(dto));
             return Created($"{result.Aso.Id}", result.Aso);
         }
