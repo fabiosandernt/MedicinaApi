@@ -1,4 +1,5 @@
-﻿using static Medicina.Application.Exame.Dto.EmpresaDto;
+﻿using Azure.Core;
+using static Medicina.Application.Exame.Dto.EmpresaDto;
 
 namespace Medicina.Application.Exame.Service
 {
@@ -6,8 +7,8 @@ namespace Medicina.Application.Exame.Service
     {
         Task<EmpresaOutputDto> Criar(EmpresaInputDto dto, Guid usuarioId);
         Task<List<EmpresaOutputDto>> ObterTodos();
-        Task<EmpresaOutputDto> Atualizar(EmpresaInputDto dto);
-        Task<EmpresaOutputDto> Deletar(EmpresaInputDto dto);
+        Task<EmpresaOutputDto> Atualizar(EmpresaInputDto dto, Guid usuarioId);
+        Task<EmpresaOutputDto> Deletar(EmpresaInputDto dto, Guid usuarioId);
         Task<EmpresaOutputDto> ObterPorId(Guid id);
 
     }

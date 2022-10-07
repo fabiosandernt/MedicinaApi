@@ -23,5 +23,10 @@ namespace Medicina.Repository.Repository
         {
             return await this.Query.ToListAsync();
         }
+
+        public async Task<IEnumerable<Usuario>> ObterUsuarioPorId(Guid id)
+        {
+            return await this.Query.Where(x => x.Id == id).ToListAsync();
+        }
     }
 }

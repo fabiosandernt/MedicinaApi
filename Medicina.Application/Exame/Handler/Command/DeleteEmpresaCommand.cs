@@ -6,7 +6,7 @@ namespace Medicina.Application.Exame.Handler.Command
     public class DeleteEmpresaCommand : IRequest<DeleteEmpresaCommandResponse>
     {
         public EmpresaInputDto Empresa { get; set; }
-
+        public Guid IdUsuario { get; set; }
         public DeleteEmpresaCommand(EmpresaInputDto empresa)
         {
             Empresa = empresa;

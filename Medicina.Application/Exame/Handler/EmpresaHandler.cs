@@ -26,13 +26,13 @@ namespace Medicina.Application.Exame.Handler
 
         public async Task<UpdateEmpresaCommandResponse> Handle(UpdateEmpresaCommand request, CancellationToken cancellationToken)
         {
-            var result = await this._empresaService.Atualizar(request.Empresa);
+            var result = await this._empresaService.Atualizar(request.Empresa, request.IdUsuario);
             return new UpdateEmpresaCommandResponse(result);
         }
 
         public async Task<DeleteEmpresaCommandResponse> Handle(DeleteEmpresaCommand request, CancellationToken cancellationToken)
         {
-            var result = await this._empresaService.Deletar(request.Empresa);
+            var result = await this._empresaService.Deletar(request.Empresa, request.IdUsuario);
             return new DeleteEmpresaCommandResponse(result);
         }
         public async Task<GetAllEmpresaQueryResponse> Handle(GetAllEmpresaQuery request, CancellationToken cancellationToken)

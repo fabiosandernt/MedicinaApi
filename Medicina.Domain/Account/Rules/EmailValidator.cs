@@ -19,9 +19,7 @@ namespace Medicina.Domain.Account.Rules
                 .NotEmpty()
                 .Must(BeAEmailValid).WithMessage("Email inválido");
         }
-
         private bool BeAEmailValid(string valor) => Regex.IsMatch(valor, Pattern);
-
 
     }
 }

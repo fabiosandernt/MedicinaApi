@@ -5,6 +5,7 @@ using Medicina.CrossCutting.JwtService.Dto;
 using Medicina.Domain.Account;
 using Medicina.Domain.Account.Repository;
 using Medicina.Domain.Account.ValueObject;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using static Medicina.Application.Exame.Dto.UsuarioDto;
@@ -28,7 +29,7 @@ namespace Medicina.Application.Exame.Service
             _jwtService = jwtService;
         }
 
-        
+
         public async Task<UsuarioOutputDto> Criar(UsuarioInputDto dto)
         {
             if (await _usuarioRepository.AnyAsync(x => x.Email.Valor == dto.Email.Valor))
@@ -44,7 +45,7 @@ namespace Medicina.Application.Exame.Service
 
         }
 
-        public async Task<UsuarioOutputDto> Deletar(UsuarioInputDto dto)
+        public async Task<UsuarioOutputDto> Deletar([FromBody] UsuarioInputDto dto)
         {
             var usuario = this.mapper.Map<Medicina.Domain.Account.Usuario>(dto);
 

@@ -26,7 +26,7 @@ namespace Medicina.Repository.Mapping
                 p.Property(f => f.Valor).HasColumnName("Email").IsRequired().HasMaxLength(1024);
             });
 
-            builder.HasMany(x => x.Funcionarios).WithOne(x => x.Empresa);
+            builder.HasMany(x => x.Funcionarios);
         }
     }
 }

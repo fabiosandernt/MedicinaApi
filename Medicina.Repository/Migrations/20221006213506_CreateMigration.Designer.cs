@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicina.Repository.Migrations
 {
     [DbContext(typeof(MedicinaContext))]
-    [Migration("20221005220250_PrimeiraMigration")]
-    partial class PrimeiraMigration
+    [Migration("20221006213506_CreateMigration")]
+    partial class CreateMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

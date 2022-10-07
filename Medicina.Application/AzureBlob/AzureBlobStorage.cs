@@ -19,10 +19,10 @@ namespace Medicina.Application.AzureBlob
             this.configuration = configuration;
         }
 
-        public string UploadBase64(string base64Image, string conteiner)
-        {
+        public async Task<string> UploadBase64(string base64Image, string conteiner)
+        { 
             //Gera um nome randomico do imagem
-            var fileName = Guid.NewGuid().ToString() + "jpg";
+            var fileName = Guid.NewGuid().ToString() + ".jpg";
 
             //Limpa o hash enviado
             var data = new Regex(@"^data:image\/[a-z]+;base64,").Replace(base64Image, "");
@@ -36,13 +36,14 @@ namespace Medicina.Application.AzureBlob
             //Envia a imagem
             using (var stream = new MemoryStream(imageBytes))
             {
-                bobClient.Upload(stream);
+                await bobClient.UploadAsync(stream);
             }
 
             //Retorno a URL da imagem
             return bobClient.Uri.AbsoluteUri;
         }
 
+        //Não utilizar esta metodo
         public async Task<string> UploadFile(string fileName, Stream buffer, string directory = "")
         {
             BlobServiceClient blobServiceClient = new BlobServiceClient(this.configuration["BlobStorageConnection"]);

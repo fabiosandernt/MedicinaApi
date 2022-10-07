@@ -12,29 +12,28 @@ namespace Medicina.Application.Exame.Service
         private readonly IAsoRepository asoRepository;
         private readonly IFuncionarioRepository funcionarioRepository;
         private readonly IMapper mapper;
+        private readonly AzureBlobStorage storage;
 
-        public AsoService(IAsoRepository asoRepository, IFuncionarioRepository funcionarioRepository, IMapper mapper)
+        public AsoService(IAsoRepository asoRepository, IFuncionarioRepository funcionarioRepository, IMapper mapper, AzureBlobStorage storage)
         {
             this.asoRepository = asoRepository;
             this.funcionarioRepository = funcionarioRepository;
             this.mapper = mapper;
+            this.storage = storage;
         }
 
         public async Task<AsoOutputDto> Criar(AsoInputDto dto)
         {
 
+            var url = await storage.UploadBase64(dto.Imagem, "images");
+
             var funcionario = await this.funcionarioRepository.ObterTodosFuncionariosPorCpf(dto.Cpf);
-            var funcionarioId = funcionario.FirstOrDefault()?.Id;
-           
+            var funcionarioId = funcionario.FirstOrDefault()?.Id;       
             
             var aso = this.mapper.Map<Medicina.Domain.Exame.Aso>(dto);
-
             aso.FuncionarioId = funcionarioId.Value;
-            
+            aso.Imagem = url;
             await this.asoRepository.Save(aso);
-
-
-
             return this.mapper.Map<AsoOutputDto>(aso);
 
         }

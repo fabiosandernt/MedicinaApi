@@ -43,7 +43,7 @@ namespace Medicina.Api.Controller
         public async Task<IActionResult> Criar(AsoInputDto dto)
         {
 
-            storage.UploadBase64(dto.Imagem, "images");
+            
             var result = await this.mediator.Send(new CreateAsoCommand(dto));
             return Created($"{result.Aso.Id}", result.Aso);
         }
