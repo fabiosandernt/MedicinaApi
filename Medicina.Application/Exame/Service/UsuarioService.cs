@@ -36,7 +36,10 @@ namespace Medicina.Application.Exame.Service
                 throw new Exception("Já existe um usuário cadastrado com o email informado");
 
             var usuario = this.mapper.Map<Medicina.Domain.Account.Usuario>(dto);
-
+            
+            usuario.Validate();
+            usuario.SetPassword();
+            
             usuario.Id = Guid.NewGuid();
 
             await _usuarioRepository.Save(usuario);
